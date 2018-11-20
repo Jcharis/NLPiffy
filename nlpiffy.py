@@ -1,24 +1,18 @@
 #usr/bin/python
 
-# NLPiffy-CLI
-# Version 0.00
+# NLPiffy-CLI - Version 0.00
 import click
 
 # Misc Packages
 import json
 import time
-# from pyfiglet import Figlet
-
-
+from pyfiglet import Figlet
 
 # NLP packages
 import spacy
 from textblob import TextBlob 
 nlp = spacy.load('en')
 
-# STYLED NAME with Figlet
-# f = Figlet(font="slant")
-# print(f.renderText("NLPiffy CLI"))
 
 # Save to file as text
 def save_to_file(x):
@@ -27,11 +21,6 @@ def save_to_file(x):
 	with click.open_file(filename, 'wb') as f:
 		 f.write(x)
 
-# with click.progressbar(length=len(raw_text),
-#                        label='Saving File') as bar:
-#     for p in bar:
-#         click.secho('Saving ..',bg='red')
-#         json.dump(someResults, f, indent=4)
 
 # Save to file as json
 def save_to_json(x):
@@ -157,7 +146,6 @@ def entities(text):
 def wordinfo(text):
 	""" Word Info and Analysis Including Dependency,Lemma ,Tags Using Spacy """
 	raw_text = nlp(text)
-	# final_result_wordinfo = [(token.text,token.lemma_,token.shape_,token.is_alpha,token.is_stop) for token in raw_text ]
 	allData = [('"Token":"{}","Tag":"{}","POS":"{}","Dependency":"{}","Lemma":"{}","Shape":"{}","Alpha":"{}","IsStopword":"{}"'.format(token.text,token.tag_,token.pos_,token.dep_,token.lemma_,token.shape_,token.is_alpha,token.is_stop)) for token in raw_text ]
 
 	click.secho('Your text was: {}'.format(text),fg='yellow')
@@ -172,7 +160,8 @@ def wordinfo(text):
 def read_file(text,analysis):
 	"""Read A File and Analysis it
 	"""
-	mytext = text.read(1024)
+	# mytext = text.read(1024)
+	mytext = text.read().decode('utf-8')
 	file_text = TextBlob(mytext)
 	click.secho('Your text was: {}'.format(text),fg='yellow')
 	if analysis == 'tokens':
@@ -180,14 +169,24 @@ def read_file(text,analysis):
 	elif analysis == 'sentiment':
 		click.secho('Sentiment: {}'.format(file_text.sentiment),fg='green')
 	elif analysis == 'wordinfo':
-		nlp_text = nlp(mytext.decode('utf8'))
+		nlp_text = nlp(mytext)
 		allData = [('"Token":"{}","Tag":"{}","POS":"{}","Dependency":"{}","Lemma":"{}","Shape":"{}","Alpha":"{}","IsStopword":"{}"'.format(token.text,token.tag_,token.pos_,token.dep_,token.lemma_,token.shape_,token.is_alpha,token.is_stop)) for token in nlp_text ]
 		click.secho('Word Analysis: {}'.format(allData),fg='green')
 	else:
 		click.echo("Specify Type of Action [tokens,sentiment,wordinfo]")
 
 
-
+# Parts of Speech Tagging
+@main.command()
+@click.option('--about')
+def info(about):
+	""" About NLPiffy """
+	
+# STYLED NAME with Figlet
+	f = Figlet(font="slant")
+	print(f.renderText("NLPiffy CLI"))
+	
+	
 
 
 if __name__ == '__main__':
@@ -195,4 +194,5 @@ if __name__ == '__main__':
 
 
 # By Jesse E.Agbe (JCharis)
+# J-Secur1ty
 # Jesus Saves @JCharisTech
