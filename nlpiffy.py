@@ -176,7 +176,7 @@ def read_file(text,analysis):
 		click.echo("Specify Type of Action [tokens,sentiment,wordinfo]")
 
 
-# Parts of Speech Tagging
+# Abouts
 @main.command()
 @click.option('--about')
 def info(about):
