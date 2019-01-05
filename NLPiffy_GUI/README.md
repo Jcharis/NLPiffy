@@ -18,7 +18,8 @@
 ###### Screenshot
 ![nlpiffy_gui](https://github.com/Jcharis/NLPiffy/blob/master/NLPiffy_GUI/NLPiffy_GUi-1.png)
 
-![nlpiffy_gui](https://github.com/Jcharis/NLPiffy/blob/master/NLPiffy_GUI/NLPiffy_GUi-2.png)
+###### File Processer
+![nlpiffy_gui2](https://github.com/Jcharis/NLPiffy/blob/master/NLPiffy_GUI/NLPiffy_GUI-2.png)
 
 ##### More To Add
 
